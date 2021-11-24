@@ -20,7 +20,7 @@ export class CourseInteractor implements CourseUsecase {
   }
 
   getAllCourses(courseDto?: CourseFilterDto): Promise<Course[]> {
-    return this.courseRepository.getAllCourses();
+    return this.courseRepository.getAllCourses(courseDto);
   }
 
   async getCourseById(courseDto: CourseDto): Promise<Course> {
@@ -41,5 +41,15 @@ export class CourseInteractor implements CourseUsecase {
       throw new NotFoundException('Course does not exists');
     }
     return result;
+  }
+
+  async getCourseCategories(): Promise<any[]> {
+    const result = await this.courseRepository.getCourseCategories();
+    console.log(result);
+    return result;
+  }
+
+  async getPopularCategories(): Promise<any[]> {
+    return await this.courseRepository.getPopularCategories();
   }
 }
