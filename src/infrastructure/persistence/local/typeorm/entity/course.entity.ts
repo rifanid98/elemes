@@ -22,6 +22,13 @@ export class Course implements CourseEntityInterface {
 
   @Column({
     type: 'varchar',
+    length: '50',
+    nullable: true,
+  })
+  category?: string;
+
+  @Column({
+    type: 'varchar',
     length: '100',
     nullable: true,
   })

@@ -10,6 +10,9 @@ export class CourseDto implements Course {
   name?: string;
 
   @IsNotEmpty()
+  category?: string;
+
+  @IsNotEmpty()
   description?: string;
 
   @IsOptional()
@@ -27,6 +30,9 @@ export class CourseDto implements Course {
 export class CourseFilterDto implements CourseEntityInterface {
   @IsOptional()
   name?: string;
+
+  @IsOptional()
+  category?: string;
 
   @IsOptional()
   description?: string;

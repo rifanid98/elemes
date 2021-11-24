@@ -16,6 +16,9 @@ export class CourseRequestBody implements CourseEntityInterface {
   @ApiProperty({ example: 'NestJs From Zero To Hero' })
   name?: string;
 
+  @ApiProperty({ example: 'programming' })
+  category?: string;
+
   @ApiProperty({ example: 'Learning nest.js from scrath' })
   description?: string;
 
@@ -35,6 +38,9 @@ export class CourseResponseBody implements CourseEntityInterface {
 
   @ApiProperty({ example: 'NestJs From Zero To Hero' })
   name?: string;
+
+  @ApiProperty({ example: 'programming' })
+  category?: string;
 
   @ApiProperty({ example: 'Learning nest.js from scrath' })
   description?: string;
@@ -60,6 +66,9 @@ export class CourseResponseBody implements CourseEntityInterface {
 export class CourseFilter implements CourseEntityInterface {
   @ApiProperty({ example: 'NestJs From Zero To Hero', required: false })
   name?: string;
+
+  @ApiProperty({ example: 'programming', required: false })
+  category?: string;
 
   @ApiProperty({ example: 'Learning nest.js from scrath', required: false })
   description?: string;

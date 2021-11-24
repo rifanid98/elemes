@@ -1,6 +1,7 @@
 export interface CourseEntityInterface {
   id?: number;
   name?: string;
+  category?: string;
   description?: string;
   rating?: number;
   bought?: number;
@@ -13,6 +14,7 @@ export interface CourseEntityInterface {
 export class Course implements CourseEntityInterface {
   id?: number;
   name?: string;
+  category?: string;
   description?: string;
   rating?: number;
   bought?: number;
