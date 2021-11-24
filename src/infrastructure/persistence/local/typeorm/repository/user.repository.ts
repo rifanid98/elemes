@@ -32,4 +32,8 @@ export class UserLocalRepository
     const result = await this.delete(user.id);
     return result.affected > 0;
   }
+
+  countUsers(): Promise<number> {
+    return this.count();
+  }
 }
