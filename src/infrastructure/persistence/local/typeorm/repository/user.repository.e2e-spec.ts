@@ -61,11 +61,16 @@ describe('AuthInteractor', () => {
       const result = await userRepository.getUserById(user.id);
       expect(result instanceof User).toBe(true);
     });
+
+    it('should deletes one user from database', async () => {
+      const result = await userRepository.deleteUser(user);
+      expect(result).toBe(true);
+    });
   });
 
   afterAll(async () => {
     const result = await userRepository.delete({ email: user.email });
     expect(result.affected > 0).toBe(true);
-    app.close();
+    await app.close();
   });
 });
