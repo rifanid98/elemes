@@ -6,6 +6,7 @@ export interface CourseEntityInterface {
   rating?: number;
   bought?: number;
   price?: number;
+  image?: string;
   created_at?: Date;
   updated_at?: Date;
   deleted_at?: Date;
@@ -19,6 +20,7 @@ export class Course implements CourseEntityInterface {
   rating?: number;
   bought?: number;
   price?: number;
+  image?: string;
   created_at?: Date;
   updated_at?: Date;
   deleted_at?: Date;

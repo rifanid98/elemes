@@ -53,6 +53,9 @@ export class CourseResponseBody implements CourseEntityInterface {
   @ApiProperty({ example: 1 })
   price?: number;
 
+  @ApiProperty({ example: 'programming.png', required: false })
+  image?: string;
+
   @ApiProperty()
   created_at?: Date;
 
@@ -81,6 +84,9 @@ export class CourseFilter implements CourseEntityInterface {
 
   @ApiProperty({ example: 50000, required: false })
   price?: number;
+
+  @ApiProperty({ example: 'programming.png', required: false })
+  image?: string;
 }
 
 export class CourseNotFoundResponse {
