@@ -14,7 +14,7 @@ $ yarn install
 
 ```bash
 # development
-$ yarn start
+$ yarn start:local
 
 # watch mode
 $ yarn start:dev
