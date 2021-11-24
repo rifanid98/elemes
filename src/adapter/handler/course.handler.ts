@@ -20,13 +20,11 @@ import {
   ApiNotFoundResponse,
   ApiOkResponse,
   ApiOperation,
-  ApiQuery,
   ApiTags,
 } from '@nestjs/swagger';
 import { Course } from 'domain/entity/course.entity';
 import {
   CourseConflictResponseBody,
-  CourseFilter,
   CourseNotFoundResponse,
   CourseRequestBody,
   CourseResponseBody,
@@ -54,10 +52,10 @@ export class CourseHandler {
     return this.useCase.createCourse(course);
   }
 
+  // @ApiQuery({ type: CourseFilter })
   @Get('/')
   @UseFilters(QueryExceptionFilter)
   @ApiOperation({ summary: 'Get all courses' })
-  @ApiQuery({ type: CourseFilter })
   @ApiOkResponse({
     type: [CourseResponseBody],
     description: 'Returns Course entity',

@@ -20,13 +20,11 @@ import {
   ApiNotFoundResponse,
   ApiOkResponse,
   ApiOperation,
-  ApiQuery,
   ApiTags,
 } from '@nestjs/swagger';
 import { User } from 'domain/entity/user.entity';
 import {
   UserConflictResponseBody,
-  UserFilter,
   UserNotFoundResponse,
   UserRequestBody,
   UserResponseBody,
@@ -54,10 +52,10 @@ export class UserHandler {
     return this.useCase.createUser(user);
   }
 
+  // @ApiQuery({ type: UserFilter })
   @Get('/')
   @UseFilters(QueryExceptionFilter)
   @ApiOperation({ summary: 'Get all users' })
-  @ApiQuery({ type: UserFilter })
   @ApiOkResponse({
     type: [UserResponseBody],
     description: 'Returns User entity',
