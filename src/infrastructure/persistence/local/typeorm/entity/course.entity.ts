@@ -24,28 +24,24 @@ export class Course implements CourseEntityInterface {
     type: 'varchar',
     length: '100',
     nullable: true,
-    unique: true,
   })
   description?: string;
 
   @Column({
     type: 'int',
     nullable: true,
-    unique: true,
   })
   rating?: number;
 
   @Column({
     type: 'int',
     nullable: true,
-    unique: true,
   })
   bought?: number;
 
   @Column({
     type: 'int',
     nullable: true,
-    unique: true,
   })
   price?: number;
 
