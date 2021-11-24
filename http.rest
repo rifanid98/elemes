@@ -1,0 +1,7 @@
+POST http://localhost:3000/auth/authenticator
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG5pbi5yaWZhbmRpQG5hc2h0YS5pZCIsImF1dGhlbnRpY2F0b3IiOmZhbHNlLCJpYXQiOjE2MzYwMTcxMzMsImV4cCI6MTYzNjAyMDczM30.zvTWz75RYsiAPC--fDfYbVU1OwD0t8VqvBmzb-cy8g8
+
+{}
+
+###
