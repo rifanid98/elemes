@@ -5,7 +5,7 @@ export interface UserRepository {
 
   getOneUser(user: User): Promise<User>;
 
-  getUserById(id: number): Promise<User>;
+  getUserById(user: User): Promise<User>;
 
   createUser(user: User): Promise<User>;
 
