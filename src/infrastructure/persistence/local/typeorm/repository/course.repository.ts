@@ -1,5 +1,5 @@
 import { CourseRepository } from 'domain/repository/course.repository';
-import { EntityRepository, Repository } from 'typeorm';
+import { EntityRepository, Not, Repository } from 'typeorm';
 import { Course } from '../entity/course.entity';
 
 @EntityRepository(Course)
@@ -31,5 +31,21 @@ export class CourseLocalRepository
   async deleteCourse(course: Course): Promise<boolean> {
     const result = await this.softDelete(course.id);
     return result.affected > 0;
+  }
+
+  countFreeCourses(): Promise<number> {
+    return this.count({
+      where: {
+        price: 0,
+      },
+    });
+  }
+
+  countPaidCourses(): Promise<number> {
+    return this.count({
+      where: {
+        price: Not(0),
+      },
+    });
   }
 }
