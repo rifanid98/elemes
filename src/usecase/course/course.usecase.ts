@@ -11,4 +11,8 @@ export interface CourseUsecase {
   updateCourse(courseDto: CourseDto): Promise<boolean>;
 
   deleteCourse(courseDto: CourseDto): Promise<boolean>;
+
+  getCourseCategories(): Promise<any[]>;
+
+  getPopularCategories(): Promise<any[]>;
 }

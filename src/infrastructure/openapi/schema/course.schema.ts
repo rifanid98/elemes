@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { CourseEntityInterface } from 'domain/entity/course.entity';
+import { PriceLevel } from 'src/domain/dto/course.dto';
 
 export class CourseConflictResponseBody {
   @ApiProperty({ example: 409 })
@@ -85,8 +86,12 @@ export class CourseFilter implements CourseEntityInterface {
   @ApiProperty({ example: 50000, required: false })
   price?: number;
 
-  @ApiProperty({ example: 'programming.png', required: false })
-  image?: string;
+  @ApiProperty({
+    example: PriceLevel.HIGHEST,
+    enum: PriceLevel,
+    required: false,
+  })
+  price_level: PriceLevel;
 }
 
 export class CourseNotFoundResponse {
