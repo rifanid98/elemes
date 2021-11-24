@@ -11,6 +11,7 @@ import { ConfigModuleConfig, TypeOrmConfig } from 'di/config';
 import { MulterModule } from '@nestjs/platform-express';
 import { LoggerMiddleware } from 'sharedkernel/nest/middleware';
 import { MainProvider } from 'di/provider';
+import { CourseModule } from './course.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { MainProvider } from 'di/provider';
     // MongooseModule.forRoot('mongodb://localhost/portal_nashtanet'),
     MulterModule.register({ dest: './upload' }),
     AuthModule,
+    CourseModule,
   ],
   controllers: [],
   providers: [...MainProvider],
