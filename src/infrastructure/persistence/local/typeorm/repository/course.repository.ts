@@ -19,8 +19,8 @@ export class CourseLocalRepository
     return this.findOne(course);
   }
 
-  getCourseById(id: number): Promise<Course> {
-    return this.findOne(id);
+  getCourseById(course: Course): Promise<Course> {
+    return this.findOne(course.id);
   }
 
   async updateCourse(course: Course): Promise<boolean> {
@@ -29,7 +29,7 @@ export class CourseLocalRepository
   }
 
   async deleteCourse(course: Course): Promise<boolean> {
-    const result = await this.delete(course.id);
+    const result = await this.softDelete(course.id);
     return result.affected > 0;
   }
 }
