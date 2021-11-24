@@ -24,7 +24,12 @@ export class UserLocalRepository
   }
 
   async updateUser(user: User): Promise<boolean> {
-    const updateresult = await this.update(user.id, user);
-    return updateresult.affected > 0;
+    const result = await this.update(user.id, user);
+    return result.affected > 0;
+  }
+
+  async deleteUser(user: User): Promise<boolean> {
+    const result = await this.delete(user.id);
+    return result.affected > 0;
   }
 }

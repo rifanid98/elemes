@@ -6,4 +6,5 @@ export interface UserRepository {
   getUserById(id: number): Promise<User>;
   createUser(user: User): Promise<User>;
   updateUser(user: User): Promise<boolean>;
+  deleteUser(user: User): Promise<boolean>;
 }
