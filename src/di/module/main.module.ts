@@ -13,6 +13,7 @@ import { LoggerMiddleware } from 'sharedkernel/nest/middleware';
 import { MainProvider } from 'di/provider';
 import { CourseModule } from './course.module';
 import { StatisticModule } from 'di/module/statistic.module';
+import { UserModule } from 'di/module/user.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { StatisticModule } from 'di/module/statistic.module';
     AuthModule,
     CourseModule,
     StatisticModule,
+    UserModule,
   ],
   controllers: [],
   providers: [...MainProvider],
