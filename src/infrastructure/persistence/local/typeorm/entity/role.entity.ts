@@ -4,9 +4,12 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { User } from 'src/infrastructure/persistence/local/typeorm/entity/user.entity';
+import { Exclude } from 'class-transformer';
 
 @Entity()
 export class Role implements RoleEntityInterface {
@@ -28,4 +31,8 @@ export class Role implements RoleEntityInterface {
 
   @DeleteDateColumn()
   deleted_at?: Date;
+
+  @OneToMany(() => User, (user) => user.role)
+  @Exclude({ toPlainOnly: true })
+  users: User[];
 }
