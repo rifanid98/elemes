@@ -12,6 +12,7 @@ import { MulterModule } from '@nestjs/platform-express';
 import { LoggerMiddleware } from 'sharedkernel/nest/middleware';
 import { MainProvider } from 'di/provider';
 import { CourseModule } from './course.module';
+import { StatisticModule } from 'di/module/statistic.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { CourseModule } from './course.module';
     MulterModule.register({ dest: './upload' }),
     AuthModule,
     CourseModule,
+    StatisticModule,
   ],
   controllers: [],
   providers: [...MainProvider],
