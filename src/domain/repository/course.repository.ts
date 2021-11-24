@@ -1,9 +1,10 @@
 import { Course } from 'domain/entity/course.entity';
+import { CourseFilterDto } from 'src/domain/dto/course.dto';
 
 export type Entity = any;
 
 export interface CourseRepository {
-  getAllCourses(): Promise<Course[]>;
+  getAllCourses(courseFilter: CourseFilterDto): Promise<Course[]>;
 
   getOneCourse(course: Course): Promise<Course>;
 
@@ -18,4 +19,8 @@ export interface CourseRepository {
   updateCourse(course: Course): Promise<boolean>;
 
   deleteCourse(course: Course): Promise<boolean>;
+
+  getCourseCategories(): Promise<any[]>;
+
+  getPopularCategories(): Promise<any[]>;
 }
