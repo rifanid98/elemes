@@ -19,8 +19,8 @@ export class UserLocalRepository
     return this.findOne(user);
   }
 
-  getUserById(id: number): Promise<User> {
-    return this.findOne(id);
+  getUserById(user: User): Promise<User> {
+    return this.findOne(user.id);
   }
 
   async updateUser(user: User): Promise<boolean> {
@@ -29,7 +29,7 @@ export class UserLocalRepository
   }
 
   async deleteUser(user: User): Promise<boolean> {
-    const result = await this.delete(user.id);
+    const result = await this.softDelete(user.id);
     return result.affected > 0;
   }
 
