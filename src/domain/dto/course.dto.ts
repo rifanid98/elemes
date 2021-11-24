@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsOptional, Min } from 'class-validator';
+import { IsEnum, IsNotEmpty, IsOptional, Min } from 'class-validator';
 import { Course, CourseEntityInterface } from 'domain/entity/course.entity';
 
 export class CourseDto implements Course {
@@ -27,6 +27,12 @@ export class CourseDto implements Course {
   price?: number;
 }
 
+export enum PriceLevel {
+  HIGHEST = 'highest',
+  LOWEST = 'lowest',
+  FREE = 'free',
+}
+
 export class CourseFilterDto implements CourseEntityInterface {
   @IsOptional()
   name?: string;
@@ -38,13 +44,15 @@ export class CourseFilterDto implements CourseEntityInterface {
   description?: string;
 
   @IsOptional()
-  @Min(0)
   rating?: number;
 
   @IsOptional()
-  @Min(0)
   bought?: number;
 
   @IsOptional()
   price?: number;
+
+  @IsOptional()
+  @IsEnum(PriceLevel)
+  price_level: PriceLevel;
 }
