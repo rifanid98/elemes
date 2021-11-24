@@ -1,6 +1,10 @@
 import { TypeOrmModuleAsyncOptions } from '@nestjs/typeorm/dist/interfaces/typeorm-options.interface';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { Role, User } from 'infrastructure/persistence/local/typeorm/entity';
+import {
+  Course,
+  Role,
+  User,
+} from 'infrastructure/persistence/local/typeorm/entity';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 import * as path from 'path';
 
@@ -30,7 +34,7 @@ export const TypeOrmConfig: TypeOrmModuleAsyncOptions = {
         config.get('STAGE') === 'test'
           ? false
           : config.get('TYPEORM_LOGGING') === 'true',
-      entities: [User, Role],
+      entities: [User, Role, Course],
     };
   },
 };
