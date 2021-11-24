@@ -20,11 +20,13 @@ import {
   ApiNotFoundResponse,
   ApiOkResponse,
   ApiOperation,
+  ApiQuery,
   ApiTags,
 } from '@nestjs/swagger';
 import { Course } from 'domain/entity/course.entity';
 import {
   CourseConflictResponseBody,
+  CourseFilter,
   CourseNotFoundResponse,
   CourseRequestBody,
   CourseResponseBody,
@@ -35,6 +37,26 @@ import { CourseDto, CourseFilterDto } from 'domain/dto/course.dto';
 @ApiTags('Courses')
 export class CourseHandler {
   constructor(@Inject('CourseUsecase') private useCase: CourseUsecase) {}
+
+  @Get('/categories')
+  @UseFilters(QueryExceptionFilter)
+  @ApiOperation({ summary: 'Get course categories' })
+  @ApiOkResponse({
+    description: 'Returns available categories',
+  })
+  getCourseCategories(): Promise<any[]> {
+    return this.useCase.getCourseCategories();
+  }
+
+  @Get('/populars')
+  @UseFilters(QueryExceptionFilter)
+  @ApiOperation({ summary: 'Get popular categories' })
+  @ApiOkResponse({
+    description: 'Returns most popular categories',
+  })
+  getPopularCategories(): Promise<any[]> {
+    return this.useCase.getPopularCategories();
+  }
 
   @Post('/')
   @UseFilters(QueryExceptionFilter)
@@ -52,7 +74,7 @@ export class CourseHandler {
     return this.useCase.createCourse(course);
   }
 
-  // @ApiQuery({ type: CourseFilter })
+  @ApiQuery({ type: CourseFilter })
   @Get('/')
   @UseFilters(QueryExceptionFilter)
   @ApiOperation({ summary: 'Get all courses' })
