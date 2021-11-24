@@ -4,12 +4,12 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
-  JoinColumn,
-  OneToOne,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { Role } from '.';
+import { Exclude } from 'class-transformer';
 
 @Entity()
 export class User implements UserEntityInterface {
@@ -36,6 +36,7 @@ export class User implements UserEntityInterface {
     length: '100',
     nullable: true,
   })
+  @Exclude({ toPlainOnly: true })
   password?: string;
 
   @Column({
@@ -73,6 +74,7 @@ export class User implements UserEntityInterface {
     length: '100',
     nullable: true,
   })
+  @Exclude({ toPlainOnly: true })
   authenticator_secret?: string;
 
   @CreateDateColumn()
@@ -84,7 +86,7 @@ export class User implements UserEntityInterface {
   @DeleteDateColumn()
   deleted_at?: Date;
 
-  @OneToOne(() => Role)
-  @JoinColumn()
-  role: Role;
+  @ManyToOne(() => Role, (role) => role.users)
+  @Exclude({ toPlainOnly: true })
+  role?: Role;
 }
