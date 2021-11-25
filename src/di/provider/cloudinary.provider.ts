@@ -5,9 +5,9 @@ export const CloudinaryProvider = {
   useFactory: (): ConfigOptions => {
     // TODO: put cloudinary stuff in .env
     return Cloudinary.config({
-      cloud_name: 'adnin-rifandi-sutanto-putra',
-      api_key: '242465336691126',
-      api_secret: '0gRN8VAzMt7A83Y40tEUakbwhG4',
+      cloud_name: 'your_cloud_name',
+      api_key: 'your_api_key',
+      api_secret: 'your_api_secret',
     });
   },
 };
