@@ -12,6 +12,8 @@ import { ConfigModule } from '@nestjs/config';
 import { JwtConfig } from 'di/config';
 import { MainLogger } from 'sharedkernel/nest/logger';
 import { CourseProvider } from 'di/provider';
+import { CloudinaryService } from 'di/services';
+import { CloudinaryModule } from 'src/di/module/cloudinary.module';
 
 @Module({
   imports: [
@@ -19,12 +21,13 @@ import { CourseProvider } from 'di/provider';
     PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.registerAsync(JwtConfig),
     TypeOrmModule.forFeature([CourseLocalRepository, UserLocalRepository]),
+    CloudinaryModule,
     // MongooseModule.forFeature([
     //   { name: CourseService.name, schema: CourseServiceSchema },
     // ]),
   ],
   controllers: [CourseHandler],
-  providers: [...CourseProvider, JwtStrategy, MainLogger],
+  providers: [...CourseProvider, JwtStrategy, MainLogger, CloudinaryService],
   exports: [JwtStrategy, PassportModule],
 })
 export class CourseModule {}
