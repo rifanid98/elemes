@@ -3,17 +3,25 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { Buffer } from 'buffer';
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import { CloudinaryService } from 'src/di/services';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface FileInterface {
   read<T>(fileUri: string): Promise<T[]>;
+
   exist(fileUri: string): Promise<boolean>;
+
   create(data: any, fileName: string): Promise<boolean>;
+
   delete(fileUri: string): Promise<boolean>;
+
+  upload(file: Express.Multer.File): Promise<any>;
 }
 
 @Injectable()
 export class File implements FileInterface {
+  constructor(private cloudinaryService: CloudinaryService) {}
+
   /**
    * Read data from spreadsheet file
    * @param fileUri
@@ -99,5 +107,13 @@ export class File implements FileInterface {
         resolve(true);
       });
     });
+  }
+
+  /**
+   * Upload file to server
+   * @param file
+   */
+  upload(file: Express.Multer.File): Promise<any> {
+    return this.cloudinaryService.uploadImage(file);
   }
 }
