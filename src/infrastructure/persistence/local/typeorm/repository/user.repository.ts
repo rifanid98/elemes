@@ -15,8 +15,10 @@ export class UserLocalRepository
     return this.find();
   }
 
-  getOneUser(user: User): Promise<User> {
-    return this.findOne(user);
+  async getOneUser(user: User): Promise<User> {
+    return this.findOne(user, {
+      relations: ['role'],
+    });
   }
 
   getUserById(user: User): Promise<User> {
