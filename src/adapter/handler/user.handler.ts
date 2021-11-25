@@ -32,7 +32,7 @@ import {
   UserResponseBody,
 } from 'infrastructure/openapi/schema';
 import { UserDto, UserFilterDto } from 'domain/dto/user.dto';
-import { Roles } from 'src/sharedkernel/nest/decorator';
+import { Role, Roles } from 'src/sharedkernel/nest/decorator';
 import { RolesGuard } from 'src/sharedkernel/nest/guard';
 import { AuthGuard } from '@nestjs/passport';
 
@@ -45,7 +45,7 @@ export class UserHandler {
   constructor(@Inject('UserUsecase') private useCase: UserUsecase) {}
 
   @Post('/')
-  @Roles('admin', 'super admin')
+  @Roles(Role.Admin, Role.SuperAdmin)
   @UseGuards(RolesGuard)
   @ApiOperation({ summary: 'Add new user' })
   @ApiBody({ type: UserRequestBody })
@@ -63,7 +63,7 @@ export class UserHandler {
 
   // @ApiQuery({ type: UserFilter })
   @Get('/')
-  @Roles('admin', 'super admin')
+  @Roles(Role.Admin, Role.SuperAdmin)
   @UseGuards(RolesGuard)
   @ApiOperation({ summary: 'Get all users' })
   @ApiOkResponse({
@@ -75,7 +75,7 @@ export class UserHandler {
   }
 
   @Get('/:id')
-  @Roles('admin', 'super admin')
+  @Roles(Role.Admin, Role.SuperAdmin)
   @UseGuards(RolesGuard)
   @ApiOperation({ summary: 'Get user detail' })
   @ApiOkResponse({
@@ -93,7 +93,7 @@ export class UserHandler {
   }
 
   @Patch('/:id')
-  @Roles('admin', 'super admin')
+  @Roles(Role.Admin, Role.SuperAdmin)
   @UseGuards(RolesGuard)
   @ApiOperation({ summary: 'Update user' })
   @ApiBody({ type: UserRequestBody })
@@ -117,7 +117,7 @@ export class UserHandler {
   }
 
   @Delete('/:id')
-  @Roles('admin', 'super admin')
+  @Roles(Role.Admin, Role.SuperAdmin)
   @UseGuards(RolesGuard)
   @ApiOperation({ summary: 'Delete user' })
   @ApiOkResponse({

@@ -35,7 +35,7 @@ import {
 } from 'infrastructure/openapi/schema';
 import { CourseDto, CourseFilterDto } from 'domain/dto/course.dto';
 import { RolesGuard } from 'src/sharedkernel/nest/guard';
-import { Roles } from 'src/sharedkernel/nest/decorator';
+import { Role, Roles } from 'src/sharedkernel/nest/decorator';
 import { AuthGuard } from '@nestjs/passport';
 
 @Controller('courses')
@@ -47,7 +47,7 @@ export class CourseHandler {
   constructor(@Inject('CourseUsecase') private useCase: CourseUsecase) {}
 
   @Get('/categories')
-  @Roles('staff', 'admin', 'super admin')
+  @Roles(Role.Staff, Role.Admin, Role.SuperAdmin)
   @UseGuards(RolesGuard)
   @ApiOperation({ summary: 'Get course categories' })
   @ApiOkResponse({
@@ -58,7 +58,7 @@ export class CourseHandler {
   }
 
   @Get('/populars')
-  @Roles('staff', 'admin', 'super admin')
+  @Roles(Role.Staff, Role.Admin, Role.SuperAdmin)
   @UseGuards(RolesGuard)
   @ApiOperation({ summary: 'Get popular categories' })
   @ApiOkResponse({
@@ -69,7 +69,7 @@ export class CourseHandler {
   }
 
   @Post('/')
-  @Roles('admin', 'super admin')
+  @Roles(Role.Admin, Role.SuperAdmin)
   @UseGuards(RolesGuard)
   @ApiOperation({ summary: 'Add new course' })
   @ApiBody({ type: CourseRequestBody })
@@ -86,7 +86,7 @@ export class CourseHandler {
   }
 
   @Get('/')
-  @Roles('staff', 'admin', 'super admin')
+  @Roles(Role.Staff, Role.Admin, Role.SuperAdmin)
   @UseGuards(RolesGuard)
   @ApiQuery({ type: CourseFilter })
   @ApiOperation({ summary: 'Get all courses' })
@@ -99,7 +99,7 @@ export class CourseHandler {
   }
 
   @Get('/:id')
-  @Roles('staff', 'admin', 'super admin')
+  @Roles(Role.Staff, Role.Admin, Role.SuperAdmin)
   @UseGuards(RolesGuard)
   @ApiOperation({ summary: 'Get course detail' })
   @ApiOkResponse({
@@ -117,7 +117,7 @@ export class CourseHandler {
   }
 
   @Patch('/:id')
-  @Roles('admin', 'super admin')
+  @Roles(Role.Admin, Role.SuperAdmin)
   @UseGuards(RolesGuard)
   @ApiOperation({ summary: 'Update course' })
   @ApiBody({ type: CourseRequestBody })
@@ -141,7 +141,7 @@ export class CourseHandler {
   }
 
   @Delete('/:id')
-  @Roles('admin', 'super admin')
+  @Roles(Role.Admin, Role.SuperAdmin)
   @UseGuards(RolesGuard)
   @ApiOperation({ summary: 'Delete course' })
   @ApiOkResponse({

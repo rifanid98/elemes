@@ -10,18 +10,22 @@ import {
   ApiOperation,
   ApiTags,
 } from '@nestjs/swagger';
-import { StatisticResponseBody } from 'src/infrastructure/openapi/schema';
+import { StatisticResponseBody } from 'infrastructure/openapi/schema';
 import { AuthGuard } from '@nestjs/passport';
+import { Role, Roles } from 'sharedkernel/nest/decorator';
+import { RolesGuard } from 'sharedkernel/nest/guard';
 
 @Controller('statistics')
-@UseGuards(AuthGuard('jwt'))
 @ApiTags('Statistic')
 @ApiBearerAuth('Authorization')
 export class StatisticHandler {
   constructor(@Inject('StatisticUsecase') private useCase: StatisticUsecase) {}
 
   @Get('/')
+  @Roles(Role.Admin, Role.SuperAdmin)
+  @UseGuards(RolesGuard)
   @UseFilters(QueryExceptionFilter)
+  @UseGuards(AuthGuard('jwt'))
   @ApiOperation({ summary: 'Get statistics' })
   @ApiOkResponse({
     type: StatisticResponseBody,
