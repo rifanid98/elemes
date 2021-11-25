@@ -4,34 +4,39 @@
 
 > This is a project created for the purposes of a test case from the hiring process at [Elemes.id](https://elemes.id)
 
-## Installation
+## Database Config
 
-```bash
-$ yarn install
-```
+- Please use the MySQL database as stated in the test case.
+- Create database elemes ```CREATE DATABASE IF NOT EXIST elemes```.
+- Change the database configuration in the ```.env.stage.local``` file in the ```TYPEORM``` section.
+- The migration will be executed automatically when the server starts.
 
-## Running the app
+## Getting Started
 
-```bash
-# development
-$ yarn start:local
-
-# watch mode
-$ yarn start:dev
-
-# production mode
-$ yarn start:prod
-```
+- Install dependencies ```yarn install```.
+- Run the server ```yarn start:local```.
+- Make sure the logs are all green.
+- Server started at ```localhost:3000```.
+- Visit swagger at ```localhost:3000/docs```.
 
 ## Test
 
-```bash
-# unit tests
-$ yarn test
+- Unit test ```yarn test```.
+- e2e test ```yarn test:e2e```.
 
-# e2e tests
-$ yarn test:e2e
+## Features
 
-# test coverage
-$ yarn test:cov
-```
+- [x] Authentication endpoints using jwt with third party authenticator
+- [x] CRUD Course endpoints
+- [x] CRUD Users endpoints
+- [x] Statistic endpoint
+- [x] Swagger out of the box :)
+- [x] Role based authentication for each endpoint. ex: Only admin and super admin roles to get access for Update and Delete operation.
+
+## Stacks
+
+- Node.js (using Nest.js framework)
+- MySQL
+- JWT
+- Cloudinary
+- Git
