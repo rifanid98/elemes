@@ -1,7 +1,7 @@
 {
-  "name": "elemes_admin",
+  "name": "elemes",
   "version": "0.0.1",
-  "description": "Backend for elemes_client",
+  "description": "Backend for Elemes LMS",
   "author": "Adnin Rifandi Sutanto Putra",
   "maintainers": [
     "Adnin Rifandi Sutanto Putra"
