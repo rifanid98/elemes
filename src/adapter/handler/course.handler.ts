@@ -10,10 +10,12 @@ import {
   Post,
   Query,
   UseFilters,
+  UseGuards,
 } from '@nestjs/common';
 import { CourseUsecase } from 'usecase/course/course.usecase';
 import { QueryExceptionFilter } from 'sharedkernel/nest/exception-filter';
 import {
+  ApiBearerAuth,
   ApiBody,
   ApiConflictResponse,
   ApiCreatedResponse,
@@ -32,14 +34,21 @@ import {
   CourseResponseBody,
 } from 'infrastructure/openapi/schema';
 import { CourseDto, CourseFilterDto } from 'domain/dto/course.dto';
+import { RolesGuard } from 'src/sharedkernel/nest/guard';
+import { Roles } from 'src/sharedkernel/nest/decorator';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('courses')
+@UseGuards(AuthGuard('jwt'))
+@UseFilters(QueryExceptionFilter)
 @ApiTags('Courses')
+@ApiBearerAuth('Authorization')
 export class CourseHandler {
   constructor(@Inject('CourseUsecase') private useCase: CourseUsecase) {}
 
   @Get('/categories')
-  @UseFilters(QueryExceptionFilter)
+  @Roles('staff', 'admin', 'super admin')
+  @UseGuards(RolesGuard)
   @ApiOperation({ summary: 'Get course categories' })
   @ApiOkResponse({
     description: 'Returns available categories',
@@ -49,7 +58,8 @@ export class CourseHandler {
   }
 
   @Get('/populars')
-  @UseFilters(QueryExceptionFilter)
+  @Roles('staff', 'admin', 'super admin')
+  @UseGuards(RolesGuard)
   @ApiOperation({ summary: 'Get popular categories' })
   @ApiOkResponse({
     description: 'Returns most popular categories',
@@ -59,7 +69,8 @@ export class CourseHandler {
   }
 
   @Post('/')
-  @UseFilters(QueryExceptionFilter)
+  @Roles('admin', 'super admin')
+  @UseGuards(RolesGuard)
   @ApiOperation({ summary: 'Add new course' })
   @ApiBody({ type: CourseRequestBody })
   @ApiCreatedResponse({
@@ -74,9 +85,10 @@ export class CourseHandler {
     return this.useCase.createCourse(course);
   }
 
-  @ApiQuery({ type: CourseFilter })
   @Get('/')
-  @UseFilters(QueryExceptionFilter)
+  @Roles('staff', 'admin', 'super admin')
+  @UseGuards(RolesGuard)
+  @ApiQuery({ type: CourseFilter })
   @ApiOperation({ summary: 'Get all courses' })
   @ApiOkResponse({
     type: [CourseResponseBody],
@@ -87,7 +99,8 @@ export class CourseHandler {
   }
 
   @Get('/:id')
-  @UseFilters(QueryExceptionFilter)
+  @Roles('staff', 'admin', 'super admin')
+  @UseGuards(RolesGuard)
   @ApiOperation({ summary: 'Get course detail' })
   @ApiOkResponse({
     type: CourseResponseBody,
@@ -104,7 +117,8 @@ export class CourseHandler {
   }
 
   @Patch('/:id')
-  @UseFilters(QueryExceptionFilter)
+  @Roles('admin', 'super admin')
+  @UseGuards(RolesGuard)
   @ApiOperation({ summary: 'Update course' })
   @ApiBody({ type: CourseRequestBody })
   @ApiOkResponse({
@@ -127,7 +141,8 @@ export class CourseHandler {
   }
 
   @Delete('/:id')
-  @UseFilters(QueryExceptionFilter)
+  @Roles('admin', 'super admin')
+  @UseGuards(RolesGuard)
   @ApiOperation({ summary: 'Delete course' })
   @ApiOkResponse({
     description: 'Course deleted',
