@@ -5,6 +5,12 @@ import {
 } from '@nestjs/common';
 import { User } from 'domain/entity/user.entity';
 
+export enum Role {
+  Staff = 'Staff',
+  Admin = 'Admin',
+  SuperAdmin = 'Super Admin',
+}
+
 export const GetUser = createParamDecorator(
   (_data, ctx: ExecutionContext): User => {
     const http = ctx.switchToHttp();
