@@ -10,10 +10,12 @@ import {
   Post,
   Query,
   UseFilters,
+  UseGuards,
 } from '@nestjs/common';
 import { UserUsecase } from 'usecase/user/user.usecase';
 import { QueryExceptionFilter } from 'sharedkernel/nest/exception-filter';
 import {
+  ApiBearerAuth,
   ApiBody,
   ApiConflictResponse,
   ApiCreatedResponse,
@@ -30,14 +32,21 @@ import {
   UserResponseBody,
 } from 'infrastructure/openapi/schema';
 import { UserDto, UserFilterDto } from 'domain/dto/user.dto';
+import { Roles } from 'src/sharedkernel/nest/decorator';
+import { RolesGuard } from 'src/sharedkernel/nest/guard';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('users')
+@UseFilters(QueryExceptionFilter)
+@UseGuards(AuthGuard('jwt'))
 @ApiTags('Users')
+@ApiBearerAuth('Authorization')
 export class UserHandler {
   constructor(@Inject('UserUsecase') private useCase: UserUsecase) {}
 
   @Post('/')
-  @UseFilters(QueryExceptionFilter)
+  @Roles('admin', 'super admin')
+  @UseGuards(RolesGuard)
   @ApiOperation({ summary: 'Add new user' })
   @ApiBody({ type: UserRequestBody })
   @ApiCreatedResponse({
@@ -54,7 +63,8 @@ export class UserHandler {
 
   // @ApiQuery({ type: UserFilter })
   @Get('/')
-  @UseFilters(QueryExceptionFilter)
+  @Roles('admin', 'super admin')
+  @UseGuards(RolesGuard)
   @ApiOperation({ summary: 'Get all users' })
   @ApiOkResponse({
     type: [UserResponseBody],
@@ -65,7 +75,8 @@ export class UserHandler {
   }
 
   @Get('/:id')
-  @UseFilters(QueryExceptionFilter)
+  @Roles('admin', 'super admin')
+  @UseGuards(RolesGuard)
   @ApiOperation({ summary: 'Get user detail' })
   @ApiOkResponse({
     type: UserResponseBody,
@@ -82,7 +93,8 @@ export class UserHandler {
   }
 
   @Patch('/:id')
-  @UseFilters(QueryExceptionFilter)
+  @Roles('admin', 'super admin')
+  @UseGuards(RolesGuard)
   @ApiOperation({ summary: 'Update user' })
   @ApiBody({ type: UserRequestBody })
   @ApiOkResponse({
@@ -105,7 +117,8 @@ export class UserHandler {
   }
 
   @Delete('/:id')
-  @UseFilters(QueryExceptionFilter)
+  @Roles('admin', 'super admin')
+  @UseGuards(RolesGuard)
   @ApiOperation({ summary: 'Delete user' })
   @ApiOkResponse({
     description: 'User deleted',
