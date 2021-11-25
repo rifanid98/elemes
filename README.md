@@ -38,5 +38,7 @@
 - Node.js (using Nest.js framework)
 - MySQL
 - JWT
+- TypeORM
 - Cloudinary
 - Git
+- Clean Architecture Design Pattern
