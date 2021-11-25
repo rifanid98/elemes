@@ -1,30 +1,38 @@
-import { IsEnum, IsNotEmpty, IsOptional, Min } from 'class-validator';
+import { IsEnum, IsOptional, Min } from 'class-validator';
 import { Course, CourseEntityInterface } from 'domain/entity/course.entity';
+import { Transform } from 'class-transformer';
 
 export class CourseDto implements Course {
   @IsOptional()
   @Min(1)
   id?: number;
 
-  @IsNotEmpty()
+  @IsOptional()
   name?: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   category?: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   description?: string;
 
   @IsOptional()
+  @Transform(({ value }) => Number.parseInt(value))
   @Min(0)
   rating?: number;
 
   @IsOptional()
   @Min(0)
+  @Transform(({ value }) => Number.parseInt(value))
   bought?: number;
 
   @IsOptional()
+  @Transform(({ value }) => Number.parseInt(value))
   price?: number;
+
+  image?: string;
+
+  file?: Express.Multer.File;
 }
 
 export enum PriceLevel {
