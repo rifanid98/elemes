@@ -1,5 +1,9 @@
 import { diskStorage, Options } from 'multer';
-import { editFileName, sheetFileFilter } from 'sharedkernel/util';
+import {
+  editFileName,
+  imagesFileFilter,
+  sheetFileFilter,
+} from 'sharedkernel/util';
 
 export const multerOptions: Options = {
   storage: diskStorage({
@@ -8,4 +12,13 @@ export const multerOptions: Options = {
     filename: editFileName,
   }),
   fileFilter: sheetFileFilter,
+};
+
+export const imageMulterOptions: Options = {
+  storage: diskStorage({
+    destination: './upload',
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    filename: editFileName,
+  }),
+  fileFilter: imagesFileFilter,
 };
