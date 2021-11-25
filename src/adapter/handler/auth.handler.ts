@@ -39,10 +39,12 @@ import {
   SignupResponseBody,
   UnauthorizedResponseBody,
 } from 'infrastructure/openapi/schema';
-import { MainLogger } from 'src/sharedkernel/nest/logger';
-import { SecurityInterface } from 'src/sharedkernel/security';
+import { MainLogger } from 'sharedkernel/nest/logger';
+import { SecurityInterface } from 'sharedkernel/security';
+import { RolesGuard } from 'sharedkernel/nest/guard';
 
 @Controller('auth')
+@UseGuards(RolesGuard)
 @ApiTags('Authentication')
 export class AuthHandler {
   private readonly context = 'AuthHandler';
