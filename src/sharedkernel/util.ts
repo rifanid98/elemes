@@ -46,6 +46,20 @@ export const sheetFileFilter = (
   callback(null, true);
 };
 
+export const imagesFileFilter = (
+  req: Request,
+  file: Express.Multer.File,
+  callback,
+) => {
+  if (!file.originalname.match(/\.(png|jpg|jpeg)$/)) {
+    return callback(
+      new UnsupportedMediaTypeException('Only image files are allowed!'),
+      false,
+    );
+  }
+  callback(null, true);
+};
+
 interface FileMapper {
   file: Express.Multer.File;
   req: Request;
