@@ -52,6 +52,13 @@ export class Course implements CourseEntityInterface {
   })
   price?: number;
 
+  @Column({
+    type: 'varchar',
+    length: 255,
+    nullable: true,
+  })
+  image?: string;
+
   @CreateDateColumn()
   created_at?: Date;
 
