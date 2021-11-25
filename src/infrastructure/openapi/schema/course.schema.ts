@@ -14,23 +14,30 @@ export class CourseConflictResponseBody {
 }
 
 export class CourseRequestBody implements CourseEntityInterface {
-  @ApiProperty({ example: 'NestJs From Zero To Hero' })
+  @ApiProperty({ example: 'NestJs From Zero To Hero', required: false })
   name?: string;
 
-  @ApiProperty({ example: 'programming' })
+  @ApiProperty({ example: 'programming', required: false })
   category?: string;
 
-  @ApiProperty({ example: 'Learning nest.js from scrath' })
+  @ApiProperty({ example: 'Learning nest.js from scrath', required: false })
   description?: string;
 
-  @ApiProperty({ example: 0 })
+  @ApiProperty({ example: 0, required: false })
   rating?: number;
 
-  @ApiProperty({ example: 0 })
+  @ApiProperty({ example: 0, required: false })
   bought?: number;
 
-  @ApiProperty({ example: 50000 })
+  @ApiProperty({ example: 50000, required: false })
   price?: number;
+
+  @ApiProperty({
+    type: 'string',
+    format: 'binary',
+    required: false,
+  })
+  file?: Express.Multer.File;
 }
 
 export class CourseResponseBody implements CourseEntityInterface {
@@ -68,22 +75,22 @@ export class CourseResponseBody implements CourseEntityInterface {
 }
 
 export class CourseFilter implements CourseEntityInterface {
-  @ApiProperty({ example: 'NestJs From Zero To Hero', required: false })
+  @ApiProperty({ required: false })
   name?: string;
 
-  @ApiProperty({ example: 'programming', required: false })
+  @ApiProperty({ required: false })
   category?: string;
 
-  @ApiProperty({ example: 'Learning nest.js from scrath', required: false })
+  @ApiProperty({ required: false })
   description?: string;
 
-  @ApiProperty({ example: 0, required: false })
+  @ApiProperty({ required: false })
   rating?: number;
 
-  @ApiProperty({ example: 0, required: false })
+  @ApiProperty({ required: false })
   bought?: number;
 
-  @ApiProperty({ example: 50000, required: false })
+  @ApiProperty({ required: false })
   price?: number;
 
   @ApiProperty({
@@ -103,4 +110,9 @@ export class CourseNotFoundResponse {
 
   @ApiProperty({ example: 'Not Found' })
   error: string;
+}
+
+export class CourseFileRequestBody {
+  @ApiProperty({ type: 'string', format: 'binary' })
+  file: string;
 }
