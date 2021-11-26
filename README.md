@@ -13,7 +13,7 @@
 ## Cloudinary Config
 
 Change the cloudinary credentials with your existing credentials in the ```src/di/provider/cloudinary.provider.ts```
-file. Otherwise, server will not run.
+file and ```.env.stage.local``` file at ```CLOUDINARY``` section. Otherwise, server will not run.
 
 ## Getting Started
 
