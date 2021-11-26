@@ -16,7 +16,7 @@ export const TypeOrmConfig: TypeOrmModuleAsyncOptions = {
   imports: [ConfigModule],
   inject: [ConfigService],
   useFactory: async (config: ConfigService) => {
-    const isProduction = config.get('STAGE') === 'production';
+    const isProduction = config.get('STAGE') === 'prod';
     return {
       ssl: isProduction,
       extra: {
@@ -28,7 +28,7 @@ export const TypeOrmConfig: TypeOrmModuleAsyncOptions = {
       username: config.get('TYPEORM_USERNAME'),
       password: config.get('TYPEORM_PASSWORD'),
       database: config.get('TYPEORM_DATABASE'),
-      synchronize: isProduction ? false : config.get('TYPEORM_SYNCHRONIZE'),
+      synchronize: config.get('TYPEORM_SYNCHRONIZE'),
       namingStrategy: new SnakeNamingStrategy(),
       migrationsTableName: 'migrations',
       migrations: [`${migrationDir}/*.ts`],

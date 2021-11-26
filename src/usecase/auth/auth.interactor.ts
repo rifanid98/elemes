@@ -19,11 +19,19 @@ import {
   AuthSignUpDto,
 } from 'domain/dto/auth.dto';
 import { AuthLocalRepository } from 'infrastructure/persistence/local/typeorm/repository/auth.repository';
-import { UserLocalRepository } from 'infrastructure/persistence/local/typeorm/repository';
+import {
+  RoleLocalRepository,
+  UserLocalRepository,
+} from 'infrastructure/persistence/local/typeorm/repository';
 import { AuthUseCase } from './auth.usecase';
 import { NotModifiedException } from 'sharedkernel/nest/exception';
 import { AuthenticatorInterface } from 'sharedkernel/authenticator';
 import { SecurityInterface } from 'sharedkernel/security';
+import {
+  Role,
+  User as UserTypeorm,
+} from 'src/infrastructure/persistence/local/typeorm/entity';
+import { RoleRepository } from 'src/domain/repository/role.repository';
 
 @Injectable()
 export class AuthInteractor implements AuthUseCase {
@@ -34,6 +42,8 @@ export class AuthInteractor implements AuthUseCase {
     private authRepository: AuthRepository,
     @InjectRepository(UserLocalRepository)
     private userRepository: UserRepository,
+    @InjectRepository(RoleLocalRepository)
+    private roleRepository: RoleRepository,
     private jwtService: JwtService,
     private configService: ConfigService,
     @Inject('AuthenticatorInterface')
@@ -152,5 +162,31 @@ export class AuthInteractor implements AuthUseCase {
     return this.jwtService.sign(
       this.presenter.json(this.presenter.show(currentUser)),
     );
+  }
+
+  async migrate(): Promise<any> {
+    const adminRole = new Role();
+    adminRole.name = 'Admin';
+    const savedAdminRrole = await this.roleRepository.createRole(adminRole);
+    const adminUser = new UserTypeorm();
+    adminUser.name = 'Admin';
+    adminUser.email = 'admin@email.com';
+    adminUser.password =
+      '$2b$10$XxLW24vcuLahUiTVOYtnVujr7bV0oQcvCndwnnARU6OW5XWgHNoPu';
+    adminUser.role = savedAdminRrole;
+    await this.userRepository.createUser(adminUser);
+
+    const staffRole = new Role();
+    staffRole.name = 'Staff';
+    const savedStaffRrole = await this.roleRepository.createRole(staffRole);
+    const staffUser = new UserTypeorm();
+    staffUser.name = 'Staff';
+    staffUser.email = 'staff@email.com';
+    staffUser.password =
+      '$2b$10$XxLW24vcuLahUiTVOYtnVujr7bV0oQcvCndwnnARU6OW5XWgHNoPu';
+    staffUser.role = savedStaffRrole;
+    await this.userRepository.createUser(staffUser);
+
+    return Promise.resolve(true);
   }
 }

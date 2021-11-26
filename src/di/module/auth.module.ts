@@ -10,13 +10,18 @@ import { ConfigModule } from '@nestjs/config';
 import { AuthProvider } from 'di/provider';
 import { JwtConfig } from 'di/config';
 import { MainLogger } from 'sharedkernel/nest/logger';
+import { RoleLocalRepository } from 'src/infrastructure/persistence/local/typeorm/repository';
 
 @Module({
   imports: [
     ConfigModule,
     PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.registerAsync(JwtConfig),
-    TypeOrmModule.forFeature([AuthLocalRepository, UserLocalRepository]),
+    TypeOrmModule.forFeature([
+      AuthLocalRepository,
+      UserLocalRepository,
+      RoleLocalRepository,
+    ]),
     // MongooseModule.forFeature([
     //   { name: AuthService.name, schema: AuthServiceSchema },
     // ]),
