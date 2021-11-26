@@ -16,5 +16,5 @@ export = {
   migrationsTableName: 'migrations',
   entities: ['**/*.entity.ts'],
   migrations: [`${migrationDir}/*.ts`],
-  cli: { migrationsDir: migrationDir },
+  cli: { migrationsDir: './src' },
 };
