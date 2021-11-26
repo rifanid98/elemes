@@ -6,6 +6,7 @@ import { Course } from 'infrastructure/persistence/local/typeorm/entity';
 import { INestApplication } from '@nestjs/common';
 import * as faker from 'faker';
 import { ConfigModuleConfig, TypeOrmConfig } from 'di/config';
+import { PriceLevel } from 'src/domain/dto/course.dto';
 
 describe('AuthInteractor', () => {
   let courseRepository: CourseLocalRepository;
@@ -42,7 +43,9 @@ describe('AuthInteractor', () => {
     });
 
     it('should returns all of courses in database', async () => {
-      const result = await courseRepository.getAllCourses();
+      const result = await courseRepository.getAllCourses({
+        price_level: PriceLevel.HIGHEST,
+      });
       expect(Array.isArray(result)).toBe(true);
       expect(result.length).toBeGreaterThanOrEqual(1);
     });
@@ -59,7 +62,7 @@ describe('AuthInteractor', () => {
     });
 
     it('should returns one course by id from database', async () => {
-      const result = await courseRepository.getCourseById(course.id);
+      const result = await courseRepository.getCourseById(course);
       expect(result instanceof Course).toBe(true);
     });
 
