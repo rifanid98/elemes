@@ -11,6 +11,10 @@
 - Change the database configuration in the ```.env.stage.local``` file in the ```TYPEORM``` section.
 - The migration will be executed automatically when the server starts.
 
+## Cloudinary Config
+
+Change the cloudinary credentials with your existing credentials in the ```src/di/provider/cloudinary.provider.ts``` file. Otherwise, server will not run.
+
 ## Getting Started
 
 - Install dependencies ```yarn install```.
