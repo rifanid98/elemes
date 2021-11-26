@@ -6,11 +6,11 @@ const typeOrmMigrationDir =
 const migrationDir = path.join(__dirname, typeOrmMigrationDir);
 
 export = {
-  type: 'mysql',
+  type: 'postgres',
   host: 'localhost',
-  port: '3306',
-  username: 'root',
-  password: 'root',
+  port: '5432',
+  username: 'postgres',
+  password: 'postgres',
   database: 'elemes',
   namingStrategy: new SnakeNamingStrategy(),
   migrationsTableName: 'migrations',
