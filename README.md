@@ -31,6 +31,9 @@ the [swagger](https://elemes-adnin.herokuapp.com/docs) docs.
 
 ### !Notes
 
+If you faced an error response when executing the migration, it means a conflict occurred indicating that the data was
+migrated before (by me or by someone else).
+
 After the migration is executed, there will be 2 roles and 2 users (Staff & Admin)
 
 ```json
