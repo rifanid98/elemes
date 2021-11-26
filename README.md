@@ -24,6 +24,9 @@ file. Otherwise, server will not run.
 - Server started at ```localhost:3000```.
 - Visit swagger at ```localhost:3000/docs```.
 
+Or you can visit the deployed endpoints [here](https://elemes-adnin.herokuapp.com/) and visit
+the [swagger](https://elemes-adnin.herokuapp.com/docs) docs.
+
 ## Authentication Flow
 
 Basic authentication :
