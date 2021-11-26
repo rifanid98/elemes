@@ -16,7 +16,7 @@ export const TypeOrmConfig: TypeOrmModuleAsyncOptions = {
   imports: [ConfigModule],
   inject: [ConfigService],
   useFactory: async (config: ConfigService) => {
-    const isProduction = config.get('STAGE') === 'production';
+    const isProduction = config.get('STAGE') === 'prod';
     return {
       ssl: isProduction,
       extra: {
