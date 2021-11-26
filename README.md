@@ -23,9 +23,34 @@ file. Otherwise, server will not run.
 - Make sure the logs are all green.
 - Server started at ```localhost:3000```.
 - Visit swagger at ```localhost:3000/docs```.
+- For data migration please visit ```localhost:3000/auth/migrate``` (localhost)
+  or ```https://elemes-adnin.herokuapp.com/api/auth/migrate```
 
 Or you can visit the deployed endpoints [here](https://elemes-adnin.herokuapp.com/) and visit
 the [swagger](https://elemes-adnin.herokuapp.com/docs) docs.
+
+### !Notes
+
+After the migration is executed, there will be 2 roles and 2 users (Staff & Admin)
+
+```json
+// Admin User Credentials
+
+{
+  "email": "staff@email.com",
+  "password": "P@ssword"
+}
+
+// Staff User Credentials
+
+{
+  "email": "admin@email.com",
+  "password": "P@ssword"
+}
+```
+
+If you create a new user using the ```/users``` or ```/auth/signup``` endpoints, the user will be created with no
+attached role. That way you can test whether the role based authentication is working or not.
 
 ## Authentication Flow
 
@@ -46,7 +71,7 @@ Basic authentication :
 ## Test
 
 - Unit test ```yarn test```.
-- e2e test ```yarn test:e2e```.
+- e2e test ```yarn test:e2e``` (not finished yet, still error at some tests)
 
 ## Features
 
