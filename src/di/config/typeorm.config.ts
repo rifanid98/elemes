@@ -22,7 +22,7 @@ export const TypeOrmConfig: TypeOrmModuleAsyncOptions = {
       extra: {
         ssl: isProduction ? { rejectUnauthorized: false } : null,
       },
-      type: 'mysql',
+      type: 'postgres',
       host: config.get('TYPEORM_HOST'),
       port: config.get('TYPEORM_PORT'),
       username: config.get('TYPEORM_USERNAME'),
