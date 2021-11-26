@@ -9,7 +9,13 @@
 - Please use the MySQL database as stated in the test case.
 - Create database elemes ```CREATE DATABASE IF NOT EXIST elemes```.
 - Change the database configuration in the ```.env.stage.local``` file in the ```TYPEORM``` section.
+
+## Database Migration
+
 - The migration will be executed automatically when the server starts.
+- Run ```yarn typeorm migration:run``` or ```npm run typeorm migration:run``` to seed default data
+- If you faced an error when executing migration command, please visit ```localhost:3000/auth/migrate``` (localhost)
+  or ```https://elemes-adnin.herokuapp.com/api/auth/migrate``` (if you have to). Some text editors or IDEs sometimes cache the TypeORM config and cause TypeORM anomalies.
 
 ## Cloudinary Config
 
@@ -23,8 +29,6 @@ file. Otherwise, server will not run.
 - Make sure the logs are all green.
 - Server started at ```localhost:3000```.
 - Visit swagger at ```localhost:3000/docs```.
-- For data migration please visit ```localhost:3000/auth/migrate``` (localhost)
-  or ```https://elemes-adnin.herokuapp.com/api/auth/migrate```
 
 Or you can visit the deployed endpoints [here](https://elemes-adnin.herokuapp.com/) and visit
 the [swagger](https://elemes-adnin.herokuapp.com/docs) docs.
