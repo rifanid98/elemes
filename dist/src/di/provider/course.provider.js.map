@@ -1,1 +1,0 @@
-{"version":3,"file":"course.provider.js","sourceRoot":"","sources":["../../../../src/di/provider/course.provider.ts"],"names":[],"mappings":";;;AACA,8EAAoE;AACpE,+EAAqE;AACrE,kDAA6C;AAEhC,QAAA,cAAc,GAAe;IACxC;QACE,OAAO,EAAE,eAAe;QACxB,QAAQ,EAAE,oCAAgB;KAC3B;IACD;QACE,OAAO,EAAE,0BAA0B;QACnC,QAAQ,EAAE,kCAAe;KAC1B;IACD;QACE,OAAO,EAAE,WAAI;QACb,QAAQ,EAAE,WAAI;KACf;CACF,CAAC"}

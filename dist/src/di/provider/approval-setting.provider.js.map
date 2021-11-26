@@ -1,1 +1,0 @@
-{"version":3,"file":"approval-setting.provider.js","sourceRoot":"","sources":["../../../../src/di/provider/approval-setting.provider.ts"],"names":[],"mappings":";;;AACA,4GAAiG;AACjG,mGAAwF;AAE3E,QAAA,uBAAuB,GAAe;IACjD;QACE,OAAO,EAAE,wBAAwB;QACjC,QAAQ,EAAE,uDAAyB;KACpC;IACD;QACE,OAAO,EAAE,mCAAmC;QAC5C,QAAQ,EAAE,qDAAwB;KACnC;CACF,CAAC"}
