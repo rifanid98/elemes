@@ -10,13 +10,6 @@
 - Create database elemes ```CREATE DATABASE IF NOT EXIST elemes```.
 - Change the database configuration in the ```.env.stage.local``` file in the ```TYPEORM``` section.
 
-## Database Migration
-
-- The migration will be executed automatically when the server starts.
-- Run ```yarn typeorm migration:run``` or ```npm run typeorm migration:run``` to seed default data
-- If you faced an error when executing migration command, please visit ```localhost:3000/auth/migrate``` (localhost)
-  or ```https://elemes-adnin.herokuapp.com/api/auth/migrate``` (if you have to). Some text editors or IDEs sometimes cache the TypeORM config and cause TypeORM anomalies.
-
 ## Cloudinary Config
 
 Change the cloudinary credentials with your existing credentials in the ```src/di/provider/cloudinary.provider.ts```
@@ -33,10 +26,18 @@ file. Otherwise, server will not run.
 Or you can visit the deployed endpoints [here](https://elemes-adnin.herokuapp.com/) and visit
 the [swagger](https://elemes-adnin.herokuapp.com/docs) docs.
 
+## Database Seeding
+
+- The migration will be executed automatically when the server starts.
+- Run ```yarn typeorm migration:run``` or ```npm run typeorm migration:run``` to seed default data.
+- If you faced an error when executing migration command, please visit ```localhost:3000/auth/migrate``` (localhost)
+  or ```https://elemes-adnin.herokuapp.com/api/auth/migrate``` (if you have to). Some text editors or IDEs sometimes
+  cache the TypeORM config and cause TypeORM anomalies.
+
 ### !Notes
 
-If you faced an error response when executing the migration, it means a conflict occurred indicating that the data was
-migrated before (by me or by someone else).
+If you faced an error response when executing the migration through the endpoint, it means a conflict occurred
+indicating that the data was migrated before (by me or by someone else).
 
 After the migration is executed, there will be 2 roles and 2 users (Staff & Admin)
 
