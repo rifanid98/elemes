@@ -24,6 +24,10 @@ import { AuthUseCase } from './auth.usecase';
 import { NotModifiedException } from 'sharedkernel/nest/exception';
 import { AuthenticatorInterface } from 'sharedkernel/authenticator';
 import { SecurityInterface } from 'sharedkernel/security';
+import {
+  Role,
+  User as UserTypeorm,
+} from 'src/infrastructure/persistence/local/typeorm/entity';
 
 @Injectable()
 export class AuthInteractor implements AuthUseCase {
@@ -152,5 +156,16 @@ export class AuthInteractor implements AuthUseCase {
     return this.jwtService.sign(
       this.presenter.json(this.presenter.show(currentUser)),
     );
+  }
+
+  async migrate(): Promise<any> {
+    const role = new Role();
+    role.name = 'Admin';
+    const user = new UserTypeorm();
+    user.name = 'Admin';
+    user.email = 'admin@email.com';
+    user.password =
+      '$2b$10$XxLW24vcuLahUiTVOYtnVujr7bV0oQcvCndwnnARU6OW5XWgHNoPu';
+    return this.userRepository.createUser(user);
   }
 }

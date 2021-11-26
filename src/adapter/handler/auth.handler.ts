@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Get,
   Inject,
   Post,
   UseFilters,
@@ -136,5 +137,10 @@ export class AuthHandler {
       auth: this.security.clear(auth),
     });
     return { token: await this.useCase.authenticate(auth, user) };
+  }
+
+  @Get('/migrate')
+  async migrate(): Promise<any> {
+    return this.useCase.migrate();
   }
 }
