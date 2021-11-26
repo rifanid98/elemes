@@ -19,6 +19,9 @@ export const TypeOrmConfig: TypeOrmModuleAsyncOptions = {
     const isProduction = config.get('STAGE') === 'production';
     return {
       ssl: isProduction,
+      extra: {
+        ssl: isProduction ? { rejectUnauthorized: false } : null,
+      },
       type: 'mysql',
       host: config.get('TYPEORM_HOST'),
       port: config.get('TYPEORM_PORT'),
